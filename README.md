@@ -55,4 +55,14 @@ Purely EXPERIMENTAL code.
 I take NO RESPONSIBILITY for any issues - use it on your own.
 If you don't like something - feel free to fork the repo and write a better version :)
 
+## Things that work in the app:
+* Adding / Removing units from army list
+* Using "Validate" button to check if your list is valid
+* Some basic sanity checking when attempting to add a unit to the list (like cost vs remaining cost, units where you can increase size like Krotox Riders), unit dependencies prior to adding )
+* Removing units (selected unit!) from list
+* clearing the list
+
+## Things that DO NOT work yet (not coded yet)
+* Saving the list as a file
+* Openning and loading in an existing list
 
