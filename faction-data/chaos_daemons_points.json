@@ -1,0 +1,199 @@
+{
+  "Faction": "Chaos Daemons",
+  "Boarding Actions Limits" : {
+    "max_characters": 2,
+    "duplicate_characters_allowed": false,
+    "max_other_units": 4,
+    "max_battleline_units": 3,
+    "duplicate_other_units_allowed": false,
+    "supported_unit_types": ["character", "battleline", "other" ]
+
+  },
+  "Boarding Actions Rules Modifications" : [
+    "The Beasts of Nurgle unit loses the Grotesque Regeneration ability",
+    "The Epidemius model loses the Tally of Pestilence ability",
+    "The Flesh Hounds unit loses the Pouncing Hunters ability",
+    "The Infernal Enrapturess model loses the Harmonic Alignment ability",
+    "The Plaguebearers unit loses the Infected Outbreak ability",
+    "The Screamers unit loses the Slashing Dive ability",
+    "The The Changeling model loses the Formless Horror ability",
+    "SHADOW OF CHAOS: for the purposes of Shadow of Chaos Army Rule, the entire battlefield is considered as No Man's Land. In addition, each time an enemy unit fails a Battle shock test, that unit only suffers a SINGLE MORTAL WOUND from the Daemonic Terror ability, instead of D3."
+  ],
+  "Boarding Actions Units": {
+    "Bloodmaster" : {
+      "unit_name": "Bloodmaster",
+      "unit_sizes": [1],
+      "requires": ["Bloodletters"],
+      "unit_type": "character",
+      "unit_cost": 85
+    },
+    "Karanak" : {
+      "unit_name": "Karanak",
+      "unit_sizes": [1],
+      "requires": ["Bloodletters"],
+      "unit_type": "character",
+      "unit_cost": 85
+    },
+    "Skulltaker" : {
+      "unit_name": "Skulltaker",
+      "unit_sizes": [1],
+      "requires": ["Bloodletters"],
+      "unit_type": "character",
+      "unit_cost": 95
+    },
+    "Changecaster" : {
+      "unit_name": "Changecaster",
+      "unit_sizes": [1],
+      "requires": ["Pink Horrors", "Blue Horrors"],
+      "unit_type": "character",
+      "unit_cost": 65
+    },
+    "Exalted Flamer" : {
+      "unit_name": "Exalted Flamer",
+      "unit_sizes": [1],
+      "requires": ["Flamers"],
+      "unit_type": "character",
+      "unit_cost": 70
+    },
+    "The Changeling" : {
+      "unit_name": "The Changeling",
+      "unit_sizes": [1],
+      "requires": ["Pink Horrors", "Blue Horrors"],
+      "unit_type": "character",
+      "unit_cost": 75
+    },
+    "Epidemius" : {
+      "unit_name": "Epidemius",
+      "unit_sizes": [1],
+      "requires": ["Plaguebearers"],
+      "unit_type": "character",
+      "unit_cost": 145
+    },
+    "Poxbringer" : {
+      "unit_name": "Poxbringer",
+      "unit_sizes": [1],
+      "requires": ["Plaguebearers"],
+      "unit_type": "character",
+      "unit_cost": 75
+    },
+    "Sloppity Bilepiper" : {
+      "unit_name": "Sloppity Bilepiper",
+      "unit_sizes": [1],
+      "requires": ["Plaguebearers"],
+      "unit_type": "character",
+      "unit_cost": 55
+    },
+    "Spoilpox Scrivener" : {
+      "unit_name": "Spoilpox Scrivener",
+      "unit_sizes": [1],
+      "requires": ["Plaguebearers"],
+      "unit_type": "character",
+      "unit_cost": 65
+    },
+    "Contorted Epitome" : {
+      "unit_name": "Contorted Epitome",
+      "unit_sizes": [1],
+      "requires": ["Daemonettes"],
+      "unit_type": "character",
+      "unit_cost": 85
+    },
+    "Infernal Enrapturess" : {
+      "unit_name": "Infernal Enrapturess",
+      "unit_sizes": [1],
+      "requires": ["Daemonettes"],
+      "unit_type": "character",
+      "unit_cost": 65
+    },
+    "The Masque of Slaanesh" : {
+      "unit_name": "The Masque of Slaanesh",
+      "unit_sizes": [1],
+      "requires": ["Daemonettes"],
+      "unit_type": "character",
+      "unit_cost": 105
+    },
+    "Tranceweaver" : {
+      "unit_name": "Tranceweaver",
+      "unit_sizes": [1],
+      "requires": ["Daemonettes"],
+      "unit_type": "character",
+      "unit_cost": 60
+    },
+    "Bloodletters" : {
+      "unit_name": "Bloodletters",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 160
+    },
+    "Blue Horrors" : {
+      "unit_name": "Blue Horrors",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 125
+    },
+    "Pink Horrors" : {
+      "unit_name": "Pink Horrors",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 140
+    },
+    "Plaguebearers" : {
+      "unit_name": "Plague Bearers",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 145
+    },
+    "Nurglings" : {
+      "unit_name": "Nurglings",
+      "unit_sizes": [3],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 40
+    },
+    "Daemonettes" : {
+      "unit_name": "Daemonettes",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 140
+    },
+    "Flesh Hounds" : {
+      "unit_name": "Flesh Hounds",
+      "unit_sizes": [5],
+      "requires": [],
+      "unit_type": "other",
+      "unit_cost": 70
+    },
+    "Flamers" : {
+      "unit_name": "Flamers",
+      "unit_sizes": [3],
+      "requires": [],
+      "unit_type": "other",
+      "unit_cost": 65
+    },
+    "Screamers" : {
+      "unit_name": "Screamers",
+      "unit_sizes": [3],
+      "requires": [],
+      "unit_type": "other",
+      "unit_cost": 90
+    },
+    "Beasts of Nurgle" : {
+      "unit_name": "Beasts of Nurgle",
+      "unit_sizes": [1, 2],
+      "requires": [],
+      "unit_type": "other",
+      "unit_cost": 75
+    },
+    "Fiends" : {
+      "unit_name": "Fiends",
+      "unit_sizes": [3],
+      "requires": [],
+      "unit_type": "other",
+      "unit_cost": 150
+    }
+  }
+}

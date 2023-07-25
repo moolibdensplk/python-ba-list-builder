@@ -1,0 +1,152 @@
+{
+  "Faction": "Tau Empire",
+  "Boarding Actions Limits" : {
+    "max_characters": 1,
+    "max_battleline_units": 3,
+    "duplicate_characters_allowed": false,
+    "max_fastattack_units": 2,
+    "duplicate_fastattck_units_allowed": false,
+    "max_elite_units": 1,
+    "max_krootmerc_units": 4,
+    "duplicate_krootemerc_units_allowed": false,
+    "supported_unit_types": ["character", "battleline", "krootmerc", "fastattack", "elite" ]
+
+  },
+  "Boarding Actions Rules Modifications" : [
+    "The Commander Farsight model loses the Deep Strike, Way of the Short Blade and Aggressive Offensive abilities",
+    "The Crisis Battlesuits unit loses the Deep Strike and Turbo-Jets abilities",
+    "The Stealth Battlesuits unit loses the Homing Beacon ability",
+    "The Strike Team unit loses the Cover Fire ability",
+    "The Tactical Drones unit loses the Deep Strike ability",
+    "The Vespid Stingwings unit loses the Deep Strike and Airborne Agility abilities"
+
+  ],
+  "Boarding Actions Units": {
+    "Aun'Shi" : {
+      "unit_name" : "Aun'Shi",
+      "unit_sizes": [1],
+      "requires": [],
+      "unit_type": "character",
+      "unit_cost": 60
+    },
+    "Aun'Va" : {
+      "unit_name" : "Aun'Va",
+      "unit_sizes": [1],
+      "requires": [],
+      "unit_type": "character",
+      "unit_cost": 65
+    },
+    "Cadre Fireblade" : {
+      "unit_name" : "Cadre Fireblade",
+      "unit_sizes": [1],
+      "requires": [],
+      "unit_type": "character",
+      "unit_cost": 50
+    },
+    "Commander Farsight" : {
+      "unit_name": "Commander Farsight",
+      "unit_sizes": [1],
+      "requires": [],
+      "unit_type": "character",
+      "unit_cost": 120
+    },
+    "Darkstrider" : {
+      "unit_name": "Darkstrider",
+      "unit_sizes": [1],
+      "requires": [],
+      "unit_type": "character",
+      "unit_cost": 75
+    },
+    "Ethereal" : {
+      "unit_name": "Ethereal",
+      "unit_sizes": [1],
+      "requires": [],
+      "unit_type": "character",
+      "unit_cost": 50
+    },
+    "Kroot Shaper" : {
+      "unit_name": "Kroot Shaper",
+      "unit_sizes": [1],
+      "requires": ["Kroot Carnivores"],
+      "unit_type": "krootmerc",
+      "unit_cost": 50
+    },
+    "Kroot Hounds" : {
+      "unit_name": "Kroot Hounds",
+      "unit_sizes": [4,8,12],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 160
+    },
+    "Breacher Team" : {
+      "unit_name": "Breacher Team",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 115
+    },
+    "Strike Team" : {
+      "unit_name": "Strike Team",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 100
+    },
+    "Kroot Carnivores" : {
+      "unit_name": "Kroot Carnivores",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "battleline",
+      "unit_cost": 75
+    },
+    "Pathfinder Team" : {
+      "unit_name": "Pathfinder Team",
+      "unit_sizes": [10],
+      "requires": [],
+      "unit_type": "fastattack",
+      "unit_cost": 120
+    },
+    "Tactical Drones" : {
+      "unit_name": "Tactical Drones",
+      "unit_sizes": [4],
+      "requires": [],
+      "unit_type": "fastattack",
+      "unit_cost": 70
+    },
+    "Kroot Farstalkers" : {
+      "unit_name": "Kroot Farstalkers",
+      "unit_sizes": [12],
+      "unit_type": "krootmerc",
+      "requires": ["Kroot Carnivores"],
+      "unit_cost": 105
+    },
+    "Krotox Riders" : {
+      "unit_name": "Krotox Riders",
+      "unit_sizes": [1, 2, 3],
+      "unit_type": "krootmerc",
+      "requires": ["Kroot Carnivores"],
+      "unit_cost": 35
+    },
+    "Crisis Battlesuits" : {
+      "unit_name": "Crisis Battlesuits",
+      "unit_sizes": [3],
+      "requires": [],
+      "unit_type": "elite",
+      "unit_cost": 195
+    },
+    "Stealth Battlesuits" : {
+      "unit_name": "Stealth Battlesuits",
+      "unit_sizes": [3],
+      "requires": [],
+      "unit_type": "elite",
+      "unit_cost": 75
+    },
+    "Vespid Stingwings" : {
+      "unit_name": "Vespid Stingwings",
+      "unit_sizes": [5],
+      "requires": [],
+      "unit_type": "special",
+      "unit_cost": 75
+    }
+  }
+}
