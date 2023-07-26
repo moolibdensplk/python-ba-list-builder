@@ -140,7 +140,7 @@
       "unit_cost": 140
     },
     "Plaguebearers" : {
-      "unit_name": "Plague Bearers",
+      "unit_name": "Plaguebearers",
       "unit_sizes": [10],
       "requires": [],
       "unit_type": "battleline",
