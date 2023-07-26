@@ -1,10 +1,9 @@
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore, QtGui, QtWidgets
 # from faction_choice_dialog import *
-from error_window import *
-from unit_object_widget import *
-from boarding_actions_list import *
-from error_window import *
+from Internal.error_window import *
+from Internal.boarding_actions_list import *
+from Internal.error_window import *
 import sys
 
 
@@ -63,7 +62,6 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
         # populate the combobox with units and their cost
         for unit in self.available_units:
             # unit will be Str
-            # print("DEBUG: " + unit)
             unit_name_with_cost = unit + ", Cost: " + str(self.available_units[unit]['unit_cost'])
             self.unitChoiceComboBox.addItem(unit_name_with_cost, self.available_units[unit])
 
@@ -73,7 +71,7 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
             print("SAVING List as %s" % self.list_file)
 
         def close_list():
-            print("Closing list ...")
+            sys.exit(1)
 
         def clear_list():
             while self.unitListTableWidget.rowCount() > 0:

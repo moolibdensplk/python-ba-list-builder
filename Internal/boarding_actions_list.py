@@ -45,17 +45,17 @@ class BoardingActionsList(object):
 
     def check_require(self, req_unit_name, selected_units):
         # this does not work as expected
-        print("DEBUG: checking if %s is in %s" % (req_unit_name,
-                                                  str(selected_units)))
-        print("DEBUG: size of units_added: %s" % str(len(selected_units)))
+        #print("DEBUG: checking if %s is in %s" % (req_unit_name,
+        #                                          str(selected_units)))
+        # print("DEBUG: size of units_added: %s" % str(len(selected_units)))
 
         if req_unit_name in selected_units:
-            print("DEBUG: FOUND %s!! in %s.." % (req_unit_name,
-                                                 str(selected_units)))
+            #print("DEBUG: FOUND %s!! in %s.." % (req_unit_name,
+            #                                     str(selected_units)))
             return True
         else:
-            print("ERROR: prerequisite unit: %s NOT PRESENT in the list."
-                  % req_unit_name)
+            #print("ERROR: prerequisite unit: %s NOT PRESENT in the list."
+            #      % req_unit_name)
             return False
 
     def check_max_characters(self, army_list, max_char):
@@ -163,7 +163,7 @@ class BoardingActionsList(object):
         if len(krootmerc_duplicates) > 0:
             duplicate_unit_types.append("krootmerc")
 
-        print("DEBUG: duplicated units in types: %s" % duplicate_unit_types)
+        # print("DEBUG: duplicated units in types: %s" % duplicate_unit_types)
         return duplicate_unit_types
 
     def get_faction_rules(self):
@@ -189,3 +189,4 @@ class BoardingActionsList(object):
             else:
                 continue
         return new_dict
+
