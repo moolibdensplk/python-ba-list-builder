@@ -27,7 +27,7 @@
       "unit_sizes": [1],
       "requires": [],
       "unit_type": "character",
-      "unit_cost": 60
+      "unit_cost": 50
     },
     "Aun'Va" : {
       "unit_name" : "Aun'Va",
@@ -41,21 +41,21 @@
       "unit_sizes": [1],
       "requires": [],
       "unit_type": "character",
-      "unit_cost": 50
+      "unit_cost": 40
     },
     "Commander Farsight" : {
       "unit_name": "Commander Farsight",
       "unit_sizes": [1],
       "requires": [],
       "unit_type": "character",
-      "unit_cost": 120
+      "unit_cost": 90
     },
     "Darkstrider" : {
       "unit_name": "Darkstrider",
       "unit_sizes": [1],
       "requires": [],
       "unit_type": "character",
-      "unit_cost": 75
+      "unit_cost": 60
     },
     "Ethereal" : {
       "unit_name": "Ethereal",
@@ -76,35 +76,35 @@
       "unit_sizes": [4,8,12],
       "requires": [],
       "unit_type": "battleline",
-      "unit_cost": 160
+      "unit_cost": 30
     },
     "Breacher Team" : {
       "unit_name": "Breacher Team",
       "unit_sizes": [10],
       "requires": [],
       "unit_type": "battleline",
-      "unit_cost": 115
+      "unit_cost": 90
     },
     "Strike Team" : {
       "unit_name": "Strike Team",
       "unit_sizes": [10],
       "requires": [],
       "unit_type": "battleline",
-      "unit_cost": 100
+      "unit_cost": 80
     },
     "Kroot Carnivores" : {
       "unit_name": "Kroot Carnivores",
       "unit_sizes": [10],
       "requires": [],
       "unit_type": "battleline",
-      "unit_cost": 75
+      "unit_cost": 55
     },
     "Pathfinder Team" : {
       "unit_name": "Pathfinder Team",
       "unit_sizes": [10],
       "requires": [],
       "unit_type": "fastattack",
-      "unit_cost": 120
+      "unit_cost": 90
     },
     "Tactical Drones" : {
       "unit_name": "Tactical Drones",
@@ -118,7 +118,7 @@
       "unit_sizes": [12],
       "unit_type": "krootmerc",
       "requires": ["Kroot Carnivores"],
-      "unit_cost": 105
+      "unit_cost": 70
     },
     "Krotox Riders" : {
       "unit_name": "Krotox Riders",
@@ -132,14 +132,14 @@
       "unit_sizes": [3],
       "requires": [],
       "unit_type": "elite",
-      "unit_cost": 195
+      "unit_cost": 180
     },
     "Stealth Battlesuits" : {
       "unit_name": "Stealth Battlesuits",
       "unit_sizes": [3],
       "requires": [],
       "unit_type": "elite",
-      "unit_cost": 75
+      "unit_cost": 60
     },
     "Vespid Stingwings" : {
       "unit_name": "Vespid Stingwings",
