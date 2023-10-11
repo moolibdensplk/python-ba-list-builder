@@ -1,1 +1,5 @@
 .python-version
+scratchFiles/*
+internal/__pycache__/*
+boarding_actions_lists/*.pdf
+.idea/*

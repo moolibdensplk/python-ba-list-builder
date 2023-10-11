@@ -4,6 +4,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from Internal.error_window import *
 from Internal.boarding_actions_list import *
 from Internal.error_window import *
+from Internal.pdf_generator import *
 import sys
 
 
@@ -11,9 +12,8 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
     def __init__(self, faction):
         super(BAAListBuilderWindow, self).__init__()
         self.faction = faction
-        self.list_file = "My-" + self.faction + "-dummy-list.txt"
         self.list_saved = False
-
+        self.list_validated = False
         loadUi("ui/listBuilderWindow.ui", self)
         self.faction_label_text = "Building Boarding Actions List for: %s" % self.faction
         self.factionLabel.setText(self.faction_label_text)
@@ -66,9 +66,6 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
             self.unitChoiceComboBox.addItem(unit_name_with_cost, self.available_units[unit])
 
         self.set_updated_status_text()
-
-        def save_list():
-            print("SAVING List as %s" % self.list_file)
 
         def close_list():
             sys.exit(1)
@@ -298,15 +295,35 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
 
                 self.error_window = BAAErrorWindow(errors, "err")
                 self.error_window.setWindowTitle("Boarding Actions App - List Validation")
+                self.list_validated = False
                 self.error_window.show()
             else:
                 no_errors = "Your army list is valid !"
                 self.error_window = BAAErrorWindow(no_errors, "ok")
                 self.error_window.setWindowTitle("Boarding Actions App - List Validation")
+                self.list_validated = True
                 self.error_window.show()
 
+        def save_list():
+            list_object = self.faction_selected_units
+            faction_name = self.faction
+            faction_cost = self.faction_army_list.get_total_cost()
+            print("DEBUG: trying to generate PDF file")
+            print("DEBUG: checking validation ...")
+            if self.list_validated:
+                print("DEBUG: safe to output to PDF")
+                print("DEBUG: army list: %s" % str(list_object))
+                print("DEBUG: faction: %s" % faction_name)
+                pdf_export = BAAPdfGenerator(faction_name, list_object, faction_cost)
+                pdf_export.gerate_pdf_sheet()
 
-
+            else:
+                print("DEBUG: List NOT validated ! fix list validation errors !")
+                self.error_window = BAAErrorWindow("LIST NOT VALIDATED.\n Fix all the validation errors first!", "err")
+                self.error_window.setWindowTitle(
+                    "Boarding Actions App - Save List Error")
+                self.list_validated = False
+                self.error_window.show()
 
         self.saveListButton.clicked.connect(save_list)
         self.closeListButton.clicked.connect(close_list)
@@ -356,6 +373,8 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
         else:
             current_total_cost = current_total_cost
             self.faction_army_list.set_total_cost(current_total_cost)
+
+
 
 
 
