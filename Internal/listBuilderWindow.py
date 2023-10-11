@@ -26,6 +26,7 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
         self.elite_in_the_list = 0
         self.krootmerc_in_the_list = 0
         self.other_in_the_list = 0
+        self.faction_rules = self.faction_army_list.faction_data['Boarding Actions Rules Modifications']
         self.dependency_check_result = False
 
         # Faction Unique limits
@@ -281,14 +282,12 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
                     dup_key_name = "%s_duplication" % utype
                     list_validation_errors[dup_key_name] = 'FAIL'
 
-            print("DEBUG: validation object values")
             #print(list_validation_errors.values())
             if "FAIL" in list_validation_errors.values():
                 failed_validations = []
                 for k, val in list_validation_errors.items():
                     if "FAIL" in val:
                         failed_validations.append(k)
-                print("DEBUG: failed validations: %s" % str(failed_validations))
                 errors = "Your army list has failed to validate!\n" \
                          "Things that FAILED to validate:\n" \
                          "%s\n" % str(failed_validations)
@@ -308,17 +307,12 @@ class BAAListBuilderWindow(QtWidgets.QMainWindow):
             list_object = self.faction_selected_units
             faction_name = self.faction
             faction_cost = self.faction_army_list.get_total_cost()
-            print("DEBUG: trying to generate PDF file")
-            print("DEBUG: checking validation ...")
+
             if self.list_validated:
-                print("DEBUG: safe to output to PDF")
-                print("DEBUG: army list: %s" % str(list_object))
-                print("DEBUG: faction: %s" % faction_name)
-                pdf_export = BAAPdfGenerator(faction_name, list_object, faction_cost)
+                pdf_export = BAAPdfGenerator(faction_name, list_object, faction_cost, self.faction_rules)
                 pdf_export.gerate_pdf_sheet()
 
             else:
-                print("DEBUG: List NOT validated ! fix list validation errors !")
                 self.error_window = BAAErrorWindow("LIST NOT VALIDATED.\n Fix all the validation errors first!", "err")
                 self.error_window.setWindowTitle(
                     "Boarding Actions App - Save List Error")
