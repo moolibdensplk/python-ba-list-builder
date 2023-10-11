@@ -25,14 +25,14 @@
       "unit_sizes": [1],
       "requires": ["Bloodletters"],
       "unit_type": "character",
-      "unit_cost": 85
+      "unit_cost": 75
     },
     "Karanak" : {
       "unit_name": "Karanak",
       "unit_sizes": [1],
       "requires": ["Bloodletters"],
       "unit_type": "character",
-      "unit_cost": 85
+      "unit_cost": 75
     },
     "Skulltaker" : {
       "unit_name": "Skulltaker",
@@ -60,21 +60,21 @@
       "unit_sizes": [1],
       "requires": ["Pink Horrors", "Blue Horrors"],
       "unit_type": "character",
-      "unit_cost": 75
+      "unit_cost": 90
     },
     "Epidemius" : {
       "unit_name": "Epidemius",
       "unit_sizes": [1],
       "requires": ["Plaguebearers"],
       "unit_type": "character",
-      "unit_cost": 145
+      "unit_cost": 85
     },
     "Poxbringer" : {
       "unit_name": "Poxbringer",
       "unit_sizes": [1],
       "requires": ["Plaguebearers"],
       "unit_type": "character",
-      "unit_cost": 75
+      "unit_cost": 65
     },
     "Sloppity Bilepiper" : {
       "unit_name": "Sloppity Bilepiper",
@@ -123,7 +123,7 @@
       "unit_sizes": [10],
       "requires": [],
       "unit_type": "battleline",
-      "unit_cost": 160
+      "unit_cost": 140
     },
     "Blue Horrors" : {
       "unit_name": "Blue Horrors",
@@ -144,14 +144,14 @@
       "unit_sizes": [10],
       "requires": [],
       "unit_type": "battleline",
-      "unit_cost": 145
+      "unit_cost": 125
     },
     "Nurglings" : {
       "unit_name": "Nurglings",
       "unit_sizes": [3],
       "requires": [],
       "unit_type": "battleline",
-      "unit_cost": 40
+      "unit_cost": 35
     },
     "Daemonettes" : {
       "unit_name": "Daemonettes",
@@ -172,28 +172,28 @@
       "unit_sizes": [3],
       "requires": [],
       "unit_type": "other",
-      "unit_cost": 65
+      "unit_cost": 80
     },
     "Screamers" : {
       "unit_name": "Screamers",
       "unit_sizes": [3],
       "requires": [],
       "unit_type": "other",
-      "unit_cost": 90
+      "unit_cost": 80
     },
     "Beasts of Nurgle" : {
       "unit_name": "Beasts of Nurgle",
       "unit_sizes": [1, 2],
       "requires": [],
       "unit_type": "other",
-      "unit_cost": 75
+      "unit_cost": 70
     },
     "Fiends" : {
       "unit_name": "Fiends",
       "unit_sizes": [3],
       "requires": [],
       "unit_type": "other",
-      "unit_cost": 150
+      "unit_cost": 130
     }
   }
 }
