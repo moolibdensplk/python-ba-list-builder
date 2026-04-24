@@ -1,0 +1,76 @@
+{
+  "faction": "Chaos Daemons",
+  "detachment": "Rotten and Rusted",
+  "leader_enhancements": [
+    "Virulent Corruption",
+    "Endless Gift"
+  ],
+  "mustering_rules": {
+    "max_leaders": 2,
+    "leaders_duplicates_allowed": false,
+    "max_unique_battleline_units": 3,
+    "max_monster_units": 1,
+    "max_unique_other_units": 0,
+    "max_other_units": 0,
+    "max_elite_units": 0
+  },
+  "leaders" : {
+    "Epidemius" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 80
+    },
+    "Poxbringer" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 55
+    },
+    "Sloppity Bile Piper" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 55
+    },
+    "Spoilpox Scrivener" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 60
+    }
+  },
+
+  "units": {
+    "Plaguebearers": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "battle_line",
+      "unit_cost": 110
+    },
+    "Nurglings": {
+      "unit_size": 3,
+      "max_unit_size": 3,
+      "unit_type":  "battle_line",
+      "unit_cost": 40
+    },
+    "Beast of Nurgle (Single)": {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "monster",
+      "unit_cost": 65
+    },
+    "Beasts of Nurgle (Double)": {
+      "unit_size": 2,
+      "max_unit_size": 2,
+      "unit_type": "monster",
+      "unit_cost": 130
+    }
+  }
+
+
+}

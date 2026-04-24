@@ -1,5 +1,4 @@
-pyqt5
+PyQT5
 pyqt5-tools
-jinja2
-pdfkit
+demjson3
 playwright
