@@ -1,0 +1,96 @@
+{
+  "faction": "Tau Empire",
+  "detachment": "Starfire Cadre",
+  "leader_enhancements": [
+    "Target Optimisation Microdrones",
+    "Duty's Echo"
+  ],
+  "mustering_rules": {
+    "max_leaders": 2,
+    "leaders_duplicates_allowed": false,
+    "max_unique_battleline_units": 3,
+    "max_monster_units": 0,
+    "max_unique_other_units": 1,
+    "max_other_units": 3,
+    "max_elite_units": 1
+  },
+  "leaders": {
+    "Cadre Fireblade" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 50
+    },
+    "Darkstrider" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 60
+    },
+    "Ethereal" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 50
+    }
+  },
+  "units": {
+    "Breachers Team": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "battle_line",
+      "unit_cost": 90
+    },
+    "Strike Team": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "battle_line",
+      "unit_cost": 70
+    },
+    "Pathfinders": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "battle_line",
+      "unit_cost": 90
+    },
+    "Kroot Carnivores": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "other",
+      "unit_cost": 65
+    },
+    "Stealth Suits": {
+      "unit_size": 5,
+      "max_unit_size": 5,
+      "unit_type":  "other",
+      "unit_cost": 100
+    },
+    "Vespid Stingwings": {
+      "unit_size": 5,
+      "max_unit_size": 5,
+      "unit_type":  "other",
+      "unit_cost": 65
+    },
+    "Crisis Sunforge": {
+      "unit_size": 3,
+      "max_unit_size": 3,
+      "unit_type":  "elite",
+      "unit_cost": 140
+    },
+    "Crisis Fireknife": {
+      "unit_size": 3,
+      "max_unit_size": 3,
+      "unit_type":  "elite",
+      "unit_cost": 120
+    },
+    "Crisis Starscythe": {
+      "unit_size": 3,
+      "max_unit_size": 3,
+      "unit_type":  "elite",
+      "unit_cost": 110
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "faction": "Chaos Daemons",
+  "detachment": "Pandemonic Inferno",
+  "leader_enhancements": [
+    "Fulgurating Presence",
+    "Mutagenic Flames"
+  ],
+  "mustering_rules": {
+    "max_leaders": 2,
+    "leaders_duplicates_allowed": false,
+    "max_unique_battleline_units": 3,
+    "max_monster_units": 0,
+    "max_unique_other_units": 1,
+    "max_other_units": 2,
+    "max_elite_units": 0
+  },
+  "leaders" : {
+    "Changecaster" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 60
+    },
+    "Exalted Flamer" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 65
+    },
+    "The Changeling" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 90
+    }
+  },
+
+  "units": {
+    "Pink Horrors": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "battle_line",
+      "unit_cost": 140
+    },
+    "Blue Horrors": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "battle_line",
+      "unit_cost": 125
+    },
+    "Flamers": {
+      "unit_size": 3,
+      "max_unit_size": 3,
+      "unit_type": "other",
+      "unit_cost": 65
+    },
+    "Screamers": {
+      "unit_size": 3,
+      "max_unit_size": 3,
+      "unit_type": "other",
+      "unit_cost": 80
+    }
+  }
+}

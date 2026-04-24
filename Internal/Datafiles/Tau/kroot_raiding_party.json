@@ -1,0 +1,67 @@
+{
+  "faction": "Tau Empire",
+  "detachment": "Kroot Raiding Party",
+  "leader_enhancements": [
+    "Experienced Leader",
+    "Quill Marrker"
+  ],
+  "mustering_rules": {
+    "max_leaders": 2,
+    "leaders_duplicates_allowed": false,
+    "max_unique_battleline_units": 3,
+    "max_monster_units": 0,
+    "max_unique_other_units": 3,
+    "max_other_units": 3,
+    "carnivores_other_dependency": 1,
+    "max_elite_units": 0
+  },
+  "leaders": {
+    "Kroot Flesh Shaper" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 45
+    },
+    "Kroot Trail Shaper" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 55
+    },
+    "Kroot War Shaper" : {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type": "leader",
+      "leader_enhancement": "",
+      "unit_cost": 50
+    }
+  },
+  "units": {
+    "Kroot Carnivores": {
+      "unit_size": 10,
+      "max_unit_size": 10,
+      "unit_type":  "battle_line",
+      "unit_cost": 65
+    },
+    "Kroot Farstalkers": {
+      "unit_size": 12,
+      "max_unit_size": 12,
+      "unit_type":  "other",
+      "unit_cost": 85
+    },
+    "Kroot Hounds": {
+      "unit_size": 5,
+      "max_unit_size": 5,
+      "unit_type":  "other",
+      "unit_cost": 40
+    },
+    "Krotox Riders": {
+      "unit_size": 1,
+      "max_unit_size": 1,
+      "unit_type":  "other",
+      "unit_cost": 40
+    }
+  }
+}

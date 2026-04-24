@@ -1,163 +1,134 @@
-# python-ba-list-builder
-Python + PYQT5 Warhammer 40K Boarding Actions List Builder
+# Boarding Actions - List Building Helper
 
-## Requirements
-This tool has been written using:
+## Introduction
+This python app is meant only to help sanitize your boarding patrol list building, by making sure, that your list complies with mustering rules defined for your faction / chosen detachment, in the official Boarding Actions Rules Book.
+This App will NOT provide things like:
+* weapons profiles
+* stats
+* descriptions of enhancements
+* descriptions of stratagems
 
-* Python 3.11.4
-* PyQT5 (5.15.9)
-* pyqt5-tools (5.15.9.3.3)
-* * PyQT5 Designer (provided by pip package: pyqt5-tools)
+It only provides:
+* names of available units to choose from (including leaders)
+* their point cost
+* names of leader enhancements 
 
-## How To Install
-### Linux / MacOS
-These steps assume that you have the `penv` tool installed and configured on your machine. 
+It also Validates the following:
+* no duplication happens (unless allowed in the mustering rules, like in case of battleline units like Tau Breachers !)
+* no enhancement duplication for leaders
+* total point cost fitting into the 500 points bracket
 
-* Install Python 3.11.4 first, I used `pyenv` (on MacOS X)
-```
-pyenv install 3.11.4
-```
+## Obtaining and Setup
 
-* Create a virtual env using pyenv
-```
-pyenv virtualenv 3.11.4 list_builder_app
-```
+### Requirements info
+This app has been coded in Python 3.13.5, and as such this will be a minimum version of Python required to run it.
+The setup instructions will also include things like:
+* instructions how to download the code base
+* instructions how to set up and use a python virtual environment (this is best practice, to install the app and its dependencies into a separate python virtual environment, to avoid messing up your Operating System's functionality, by not installing these modules directly in the python installation path used by the OS)
+* instructions how to install the app itself and how to run it
 
-* Activate the env
-```
-pyenv activate 3.11.4/envs/list_builder_app
-```
+* PyQT5: this app is not compatible with PyQT6. It has to use version 5!
 
-* Install all dependencies
-```
-pip install --upgrade pip
-pip install pyqt5
-pip install pyqt5-tools
-```
+Because it has been written in Python, it should run on all platforms:
+* MacOS (this is the platform it was developed on)
+* Linux
+* Windows 
 
-* checkout the code from the repo
-```
-git clone git@github.com:moolibdensplk/python-ba-list-builder.git 
-```
+### Requirements - python modules
+As per the `requiremetns.txt` file, the app requires the following python modules:
+* PyQT5
+* pyqt5-tools
+* demjson3
+* playwright  (this one is needed for handling the HTML to PDF conversion, when you use the SAVE button)
 
-or download it as ZIP and uncompress...
-
-```
-cd <folder with the code>
-```
-
-* Runthe code:
-```
-python main.py
-```
-
-### WINDOWS steps (tested on Windows 10 64bit Home edition)
-
-* Download Python 3.11.4 (that's the version I used to write it. It should work with other newer 3.x versions. It WILL NOT work with python 2.7 / 2.x !!)
-
-Windows 64 bit
-https://python.org/downloads/release/python-3114/python-3.11.4-amd64.exe
-
-Windows 32 bit:
-https://python.org/downloads/release/python-3114/python-3.11.4.exe
-
-* Install python using the installer downloaded from one of the links above
-  Make sure you TICK the checkbox on the first screen to add python.exe to your PATH:
-
-* Now update pip tool using:
-  (you will use it to install python modules needed for this app to run
+### Obtaining the code
+In order to obtainthe copy of the app, just download the codebase from GITHUB.
+For MacOS / Linux you can use `git` command line utility:
 
 ```
-pip install --upgrade pip
+$ git clone https://github.com/moolibdensplk/python-ba-list-builder.git
 ```
 
-#### Download and Unzip the app codebase from github:
+If you are on Windows, then installation and configuration of git commandline tool is way beyond this tutorial, so you might want to just download the whole package as ZIP, using the URL:
+https://github.com/moolibdensplk/python-ba-list-builder#
+and clicking the `CODE` button, and then `Download ZIP` option:
+![img.png](img.png)
 
-* Go to:  https://github.com/moolibdensplk/python-ba-list-builder
+### Create Python virtual environment
+Once you downloaded the code using git, or using the `Download ZIP` option, enter the directory where you saved the code:
+```
+$ cd python-ba-list-builder
+```
 
-  Click CODE => Download Zip
-  Open the command windows CMD shell:
+Then create a virtual environment called: `BA-venv`
+```
+$ python3 -m venv BA-venv
+```
+This will create a folder called: `Ba-venv` with an exact copy of your Python3 installation, allowing you to install any modules tools inside that virtual env, instead of your OS installed / default python3 path. Meaning - if you mess things up, you won't be messing up your operating system !
 
-  START => type `cmd` in the search textbox next to start / windows flag button
+### Acitvate your virtual environment
+All the steps following this one will include commandline a prompt showing the virtual environment's name.
+This is to highlight that the given command HAS to be executed in the virtual environment
 
-  in the CMD type :
+#### Virtual environment activation - MacOS / Linux
+In MacOS / Linux / Unix systems, to activate the virtual environment, all you have to do is:
 
-  ```
-  c:\
-  cd \Users\<yourWindowsUsername>
-  mkdir PythonProjects
-  cd PythonProjects
-  ```
+Assuming that you are already inside the `python-ba-list-builder` folder
+```
+$ source Ba-venv/bin/activate 
+```
+It will also change your os prompt to:
+```
+(BA-venv)$ ......
+```
+Showing that you currently
 
-* Now unzip the downlaoded APP zip file, and drag the resulting folder to c:\Users\<yourWindowsUsername>PythonProjects\
+#### Virtual environment activation - Windows
+On Windows systems, there is no `source` command, and instead you will most likely have a `.bat` script inside the `bin` subfodler in the `BA-venv` folder, for example: `activate.bat`
+Just execute that from the command line, and it should activate your virtual environment, changing the command line prompt just like above, in case of Linux/Unix systems.
 
-* in CMD window, enter the unzipped code directory by typing:
+```
+$ python-ba-list-builder\bin\activate.bat
+```
 
-  ```
-  cd python-ba-list-builder-main
-  ```
-  You should now be inside the following path (`c:\Users\<yourWindowsUsername>\PythonProjects\python-ba-list-builder-main\`)
+### Install Dependencies
+In order to install all the required modules, you  must make sure that you are in your virtual environment (check the prompt !)
+```
+(BA-venv)$ 
+```
+Then run the pip utility (should be installed together with Python !)
 
-#### Install and configure a Python Virtual Environment
-(to keep your python installation nice and tidy)
+```
+(BA-venv)$ pip install -U pip
+(BA-venv)$ pip install -r requirements.txt
+(BA-venv)$ playwright install
+```
 
-* Now install virtualenv module
-  ```
-  pip install virtualenv
-  ```
+### Run the app
+Once all the required python libraries have been installed using pip, you are ready to execute the `main.py` file, which will start the app.
+Once the app started, you will have a little window pop, showing 3 options:
+* creation of a new list
+* opening of a previously saved list (NOT SUPPORTED atm)
+* closing the app
 
-* Create a virtual environment:
-  ```
-  virtualenv list-builder-venv
-  ```
-  *IMPORTANT:* The above command will create a folder named after the virtual envirobnemnet name you have specified above (in this case: `list-builder-venv`) exactly INSIDE the current folder you are in.
-  If you followed the steps correctly, you should see:
-  `c:\Users\<yourWindowsUsername>\PythonProjects\python-ba-list-builder-main\list-builder-venv`
+![img_2.png](img_2.png)
 
-* Activate the virtual env you created
-
-  ```
-  .\list-builder-venv\Scripts\activate.bat
-  ```
-
-  *IMPORTANT:* after you run that command, you should see: `(list-builder-venv)` added in front of your command line prompt, like this:
-  ```
-  (list-builder-venv) C:\Users\<yourUserName>\PythonProjects\python-ba-list-builder-main>
-  ```
-
-* Run the python.exe to launch the app:
-
-  ```
-  python.exe main.py
-  ```
-  Once you run this, you should see a main app window...
-
-* Once finished using the app, DEACTIVATE the virtual environment:
-  ```
-   deactivate
-  ```
-  *IMPORTANT:* your prompt will fo back to normal the `(list-builder-venv)` part will disapear.
-  If you want to activate it again, make sure you are in the right path and run activate again:
-  ```
-  cd C:\Users\<yourUserName>\PythonProjects\python-ba-list-builder-main
-  .\list-builder-venv\Scripts\activate.bat
-  ```
   
+Choose the option to create a list, and go from there:
+* choose your faction
+* choose one of the detachments available for that faction
+* then choose your leaders, units etc.
+* Once you are happy with the list, you can click the save button, which will allow you to save the list as a PDF file.
 
-## DISCLAIMER :
-This app is not even an ALPHA version !
-Purely EXPERIMENTAL code.
-I take NO RESPONSIBILITY for any issues - use it on your own.
-If you don't like something - feel free to fork the repo and write a better version :)
+#### IMPORTANT - limited factions / detachments supported
+Due to this being a hobby / spare time kind of project, there are only two factions supported at the moment, with two detachments available for each faction:
+* Tau Empire
+  * Starfire Cadre
+  * Kroot Riding Party
+* Chaos Daemons
+  * Pandemonic Inferno
+  * Rotten and Rusted
 
-## Things that work in the app:
-* Adding / Removing units from army list
-* Using "Validate" button to check if your list is valid
-* Some basic sanity checking when attempting to add a unit to the list (like cost vs remaining cost, units where you can increase size like Krotox Riders), unit dependencies prior to adding )
-* Removing units (selected unit!) from list
-* clearing the list
+There might be more added in the future, but I might need to wait until 11th Edition launches, to avoid having to do updates twice.
 
-## Things that DO NOT work yet (not coded yet)
-* Saving the list as a file
-* Openning and loading in an existing list
-
+PS. you are more than welcome to FORK this code and make changes on your own, without waiting for me to implement things.
