@@ -1,17 +1,14 @@
-from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget, QWidget, QComboBox, QAbstractItemView, QFileDialog
 import asyncio
+import sys
+from PyQt5.QtWidgets import QTableWidgetItem, QComboBox, QAbstractItemView, QFileDialog, QMessageBox
 from playwright.async_api import async_playwright
 from Internal.Config import *
 from Internal.app_gui_full_list_view import *
 
-
-import sys
-import os
-
-
 class ListBuilderWindow(QtWidgets.QMainWindow):
     def __init__(self, faction_name,detachment_name):
         super(ListBuilderWindow, self).__init__()
+        self.ui = None
         loadUi("Internal/listBuilderWindow.ui", self)
         self.faction_name = faction_name
         self.detachment_name = detachment_name
@@ -21,7 +18,8 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         self.enhancements_list = self.detachment_data["leader_enhancements"]
         self.total_cost = 0
         self.max_cost = 500
-        self.setupUi(self)
+        self.is_enhancement_duplicated = False
+        self.setup_ui(self)
         self.show()
 
     def get_max_leaders(self):
@@ -56,7 +54,6 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         else:
             return False
 
-
     def check_max_leaders(self):
         if self.tableLeaders.rowCount() < self.get_max_leaders():
             return True
@@ -66,7 +63,6 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
     def check_selected_enhancements(self):
         selected_enhancements = []
         max_rows = self.tableLeaders.rowCount()
-        current_row = self.tableLeaders.currentRow()
 
         for row in range(0, max_rows):
             enh_widget = self.tableLeaders.cellWidget(row, 2)
@@ -79,11 +75,12 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
                 for x in range(0, max_rows):
                     w =  self.tableLeaders.cellWidget(x, 2)
                     w.setStyleSheet("color: red")
-                print("DEBUG: ENHANCEMENT DUPLICATION DETECTED! Not adding to the list ! Change one of the enhancements!")
-                # add a custom error popup later..... (instead of the print above)
+                self.is_enhancement_duplicated = True
+                self.show_error_message("[ERROR]: Duplicate enhancements selected!")
             else:
                 selected_enhancements.append(enh_widget.currentText())
                 enh_widget.setStyleSheet("color: green")
+                self.is_enhancement_duplicated = False
             l_data = {'leader_name': current_leader_name, 'leader_enhancement': current_leader_enhancement,
                       'leader_cost': current_leader_cost}
             self.boarding_patrol_roster.set_leader_enhancement(l_data, row)
@@ -125,7 +122,6 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         else:
             return False
 
-
     def check_monster_count(self, unit_name):
         max_monsters = self.detachment_data["mustering_rules"]["max_monster_units"]
         unit_type = self.detachment_data["units"][unit_name]["unit_type"]
@@ -144,12 +140,25 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
             return False
 
     def check_elite_count(self, unit_name):
-        max_elites = self.detachment_data["mustering_rules"]["max_other_units"]
+        max_elites = self.detachment_data["mustering_rules"]["max_elite_units"]
         max_unique_elites = self.detachment_data["mustering_rules"]["max_elite_units"]
-        return True
+        unit_type = self.detachment_data["units"][unit_name]["unit_type"]
 
+        row_count = self.tableUnits.rowCount()
+        elites = []
+        for row in range(0, row_count):
+            if self.tableUnits.item(row, 2).text() == unit_type:
+                elites.append(self.tableUnits.item(row, 1).text())
+        if len(elites) < max_elites:
+            if elites.count(unit_name) < max_unique_elites:
+                return True
+            else:
+                return False
+        else:
+            return False
 
-    def close_button_clicked(self):
+    @staticmethod
+    def close_button_clicked():
         sys.exit(0)
 
     def add_unit_to_table(self, unit_data):
@@ -170,7 +179,6 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         unit_type = self.detachment_data["units"][unit_name]["unit_type"]
         unit_size = self.detachment_data["units"][unit_name]["unit_size"]
         unit_data = {"unit_name": unit_name, "unit_type": unit_type,"unit_cost": unit_cost, "unit_size": unit_size}
-        # print("DEBUG: Unit DATA", unit_data)
         # checks for Monster units
         if self.check_cost_fit(unit_cost):
             # monster unit checks
@@ -182,13 +190,11 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
             # checks for Elite units
             elif self.detachment_data["units"][unit_name]["unit_type"] == "elite":
                 if self.check_elite_count(unit_name):
-                    print("DEBUG: check elite unit = True")
                     self.add_unit_to_table(unit_data)
                     self.boarding_patrol_roster.add_unit(unit_data)
                     self.update_cost_add(unit_cost)
             # checks for Other units
             elif self.detachment_data["units"][unit_name]["unit_type"] == "other":
-                print("DEBUG: UNIT TYPE: OTHER ....")
                 if self.check_other_count(unit_name):
                     self.add_unit_to_table(unit_data)
                     self.boarding_patrol_roster.add_unit(unit_data)
@@ -213,9 +219,7 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         enhancements_box = QComboBox()
         enhancements_box.setPlaceholderText("No Enhancement")
         enhancements_box.addItems(self.enhancements_list)
-
         cost = QTableWidgetItem(str(leader_data["leader_cost"]))
-
         self.tableLeaders.setItem(self.tableLeaders.rowCount() - 1, 0, l_id)
         self.tableLeaders.setItem(self.tableLeaders.rowCount() - 1, 1, name)
         self.tableLeaders.setCellWidget(self.tableLeaders.rowCount() - 1, 2, enhancements_box)
@@ -237,9 +241,6 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
                 self.boarding_patrol_roster.add_leader(leader_data)
                 self.update_cost_add(leader_data["leader_cost"])
 
-                #print("DEBUG: selected leader data: ", leader_data)
-
-
     def remove_unit_pressed(self):
         total_rows = self.tableUnits.rowCount()
         if total_rows > 0:
@@ -259,10 +260,8 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
             self.boarding_patrol_roster.remove_from_patrol(unit_data_to_delete, unit_type)
             self.update_cost_sub(unit_cost)
 
-
     def remove_leader_pressed(self):
         total_rows = self.tableLeaders.rowCount()
-
         if total_rows > 0:
             selected_row = self.tableLeaders.currentRow()
             # if you don't select a leader, always choose the last one to remove
@@ -282,14 +281,14 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
             self.update_cost_sub(int(leader_cost))
 
     def view_full_list(self):
-
-        # print("DEBUG: FULL LIST VIEW:")
         self.boarding_patrol_roster.set_total_cost(self.total_cost)
-        # print(self.boarding_patrol_roster.get_boarding_patrol())
+        if not self.is_enhancement_duplicated:
+            self.ui = BoardingPatrolViewWindow(self.boarding_patrol_roster.get_boarding_patrol())
+        else:
+            self.show_error_message("[ERROR]: List Validation failure - duplicated enhancement.")
 
-        self.ui = BoardingPatrolViewWindow(self.boarding_patrol_roster.get_boarding_patrol())
-
-    async def html_to_pdf(self, html_content, output_path):
+    @staticmethod
+    async def html_to_pdf(html_content, output_path):
         async with async_playwright() as p:
             browser = await p.chromium.launch()
             page = await browser.new_page()
@@ -297,7 +296,7 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
             await page.pdf(path=output_path)
             await browser.close()
 
-    def getSaveFileName(self):
+    def get_save_file_name(self):
         file_filter = 'PDF Files (*.pdf);;'
         response = QFileDialog.getSaveFileName(
         parent = self,
@@ -306,19 +305,28 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         filter = file_filter,
         initialFilter = 'PDF File (*.pdf)'
         )
-        print(response)
         return response[0]
 
-
     def save_list_button_clicked(self):
-        self.boarding_patrol_roster.set_total_cost(self.total_cost)
-        ba_list = self.boarding_patrol_roster.get_boarding_patrol()
-        save_file_name = self.getSaveFileName()
-        asyncio.run(self.html_to_pdf(ba_list, save_file_name))
+        if not self.is_enhancement_duplicated:
+            self.boarding_patrol_roster.set_total_cost(self.total_cost)
+            ba_list = self.boarding_patrol_roster.get_boarding_patrol()
+            save_file_name = self.get_save_file_name()
+            asyncio.run(self.html_to_pdf(ba_list, save_file_name))
+        else:
+            self.show_error_message("[ERROR]: List Validation failure.")
 
-    def setupUi(self, ListBuilderWindow):
-        ListBuilderWindow.setObjectName("ListBuilderWindow")
-        QtCore.QMetaObject.connectSlotsByName(ListBuilderWindow)
+    @staticmethod
+    def show_error_message(message):
+        error_dialog = QMessageBox()
+        error_dialog.setIcon(QMessageBox.Critical)
+        error_dialog.setText(message)
+        error_dialog.setStandardButtons(QMessageBox.Ok)
+        error_dialog.exec_()
+
+    def setup_ui(self, window_name):
+        window_name.setObjectName("ListBuilderWindow")
+        QtCore.QMetaObject.connectSlotsByName(window_name)
         # set labels
         self.currentFactionLabel.setText(self.faction_name)
         self.currentDetachmentLabel.setText(self.detachment_name)
@@ -338,7 +346,6 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         self.tableLeaders.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tableUnits.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-
         # populate the dropdowns
         self.leaderListBox.addItems(list(self.detachment_data["leaders"].keys()))
         self.unitListBox.addItems(list(self.detachment_data["units"].keys()))
@@ -351,5 +358,5 @@ class ListBuilderWindow(QtWidgets.QMainWindow):
         self.closeAppButton.clicked.connect(self.close_button_clicked)
         self.viewFullListButton.clicked.connect(self.view_full_list)
         self.saveListButton.clicked.connect(self.save_list_button_clicked)
-
-
+        self.actionSaveList.triggered.connect(self.save_list_button_clicked)
+        self.actionCloseList.triggered.connect(self.close_button_clicked)
