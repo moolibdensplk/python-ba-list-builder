@@ -1,24 +1,16 @@
-from PyQt5.uic import loadUi
-from PyQt5 import QtCore, QtWidgets
-from Internal.Config import *
 from Internal.app_gui_list_builder import *
-import sys
-import os
-
-
 
 class FactionChoiceWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(FactionChoiceWindow, self).__init__()
+        self.ui = None
         loadUi("Internal/faction-choice.ui", self)
         self.faction_list = factions
         self.detachments_list = []
         self.chosen_faction = ""
         self.chosen_detachment = ""
-        self.setupUi(self)
+        self.setup_ui(self)
         self.show()
-
-
 
     def faction_changed(self, selected_faction):
         self.detachmentChoiceBox.clear()
@@ -31,15 +23,14 @@ class FactionChoiceWindow(QtWidgets.QMainWindow):
         if self.chosen_faction in factions:
             self.ui = ListBuilderWindow(self.chosen_faction,self.chosen_detachment)
 
-    def hideUi(self, FactionChoiceWindow):
-        self.centralwidget = QtWidgets.QWidget(FactionChoiceWindow)
-        self.centralwidget.hide()
+    @staticmethod
+    def hide_ui(faction_selection_window):
+        central_widget = QtWidgets.QWidget(faction_selection_window)
+        central_widget.hide()
 
-
-
-    def setupUi(self, FactionChoiceWindow):
-        FactionChoiceWindow.setObjectName("FactionChoiceWindow")
-        QtCore.QMetaObject.connectSlotsByName(FactionChoiceWindow)
+    def setup_ui(self, faction_selection_window):
+        faction_selection_window.setObjectName("FactionChoiceWindow")
+        QtCore.QMetaObject.connectSlotsByName(faction_selection_window)
 
         # Connect signals to the methods.
         self.factionChoiceBox.currentTextChanged.connect(self.faction_changed)

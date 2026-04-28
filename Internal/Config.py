@@ -1,33 +1,18 @@
 import json
-
-"""
-end bp list should look like:
-
-leaders: {
-     "leader 1" : { cost: x, enhancement: y }
-     "leader 2" : { cost: x, enhancement: y }
-     }
-battle_line: {
-    "BL unit 1" : { cost: x, unit size: y }
-    "BL unit 2" : { cost: x, unit size: y }
-    }
-other: {
-    "Other unit 1" : { cost: x, unit size: y }
-}
-monster: {
-    "Monster 1" : { cost: x, unit size: y }
-}
-elite: {
-    "Elite 1" : { cost: x, unit size: y }
-}
-"""
+from typing_extensions import SupportsIndex
 
 class BoardingPatrolRoster:
     def __init__(self, faction_name, detachment_name):
+        self.leaders = []
+        self.battle_line = []
+        self.other = []
+        self.elite = []
+        self.monster = []
+        self.leader_enhancement = ''
         self.boarding_patrol = {
             "faction_name": faction_name,
             "detachment_name": detachment_name,
-            "leaders": [],
+            "leaders": self.leaders,
             "battle_line": [],
             "other": [],
             "elite": [],
@@ -37,72 +22,74 @@ class BoardingPatrolRoster:
         self.total_cost = 0
 
     def add_leader(self, leader_data):
-        self.boarding_patrol["leaders"].append(leader_data)
+        self.leaders.append(leader_data)
+        self.boarding_patrol["leaders"] = self.leaders
 
     def set_leader_enhancement(self,data, idx):
-        self.boarding_patrol["leaders"][idx] = data
-        # works !!!
-        # print("DEBUG: new leader data: ", self.get_leader_data(idx))
+        self.leaders[idx]= data
+        self.boarding_patrol["leaders"] = self.leaders[idx]
 
     def set_total_cost(self, cost):
         self.total_cost = cost
 
     def add_unit(self, unit_data):
         if unit_data["unit_type"] == "battle_line":
-            self.boarding_patrol["battle_line"].append(unit_data)
+            self.battle_line.append(unit_data)
+            self.boarding_patrol["battle_line"] = self.battle_line
         elif unit_data["unit_type"] == "other":
-            self.boarding_patrol["other"].append(unit_data)
+            self.other.append(unit_data)
+            self.boarding_patrol["other"] = self.other
         elif unit_data["unit_type"] == "monster":
-            self.boarding_patrol["monster"].append(unit_data)
+            self.monster.append(unit_data)
+            self.boarding_patrol["monster"] = self.monster
         elif unit_data["unit_type"] == "elite":
-            self.boarding_patrol["elite"].append(unit_data)
-
+            self.elite.append(unit_data)
+            self.boarding_patrol["elite"] = self.elite
 
     def remove_from_patrol(self,unit_data, unit_type):
-
         list_pos = self.get_unit_index(unit_type, unit_data)
-        # print("DEBUG: unit type: ", unit_type)
-        # print("DEBUG: list_pos: ", list_pos)
-        # print("DEBUG: unit_data: ", unit_data)
         if unit_type == "leader":
-            self.boarding_patrol["leaders"].pop(list_pos)
+            self.leaders.pop(list_pos)
+            self.boarding_patrol["leaders"] = self.leaders
         if unit_type == "battle_line":
-            self.boarding_patrol["battle_line"].pop(list_pos)
+            self.battle_line.pop(list_pos)
+            self.boarding_patrol["battle_line"] = self.battle_line
         if unit_type == "other":
-            self.boarding_patrol["other"].pop(list_pos)
+            self.other.pop(list_pos)
+            self.boarding_patrol["other"] = self.other
         if unit_type == "elite":
-            self.boarding_patrol["elite"].pop(list_pos)
+            self.elite.pop(list_pos)
+            self.boarding_patrol["elite"] = self.elite
         if unit_type == "monster":
-            self.boarding_patrol["monster"].pop(list_pos)
+            self.monster.pop(list_pos)
+            self.boarding_patrol["monster"] = self.monster
 
-    def get_leader_index(self, leader_object):
-        try:
-            return self.boarding_patrol["leaders"].index(leader_object)
-        except:
-            return None
+    def get_unit_index(self, unit_type, unit_data) -> SupportsIndex:
+        if unit_type == "leader":
+            leader_index = self.leaders.index(unit_data)
+            return leader_index
+        if unit_type == "battle_line":
+            battle_line_index = self.battle_line.index(unit_data)
+            return battle_line_index
+        if unit_type == "other":
+            other_index = self.other.index(unit_data)
+            return other_index
+        if unit_type == "monster":
+            monster_index = self.monster.index(unit_data)
+            return monster_index
+        if unit_type == "elite":
+            elite_index = self.elite.index(unit_data)
+            return elite_index
+        else:
+            return -1
 
-    def get_unit_index(self, unit_type, unit_data):
-        try:
-            if unit_type == "leader":
-                return self.boarding_patrol["leaders"].index(unit_data)
-            else:
-                return self.boarding_patrol[unit_type].index(unit_data)
-        except ValueError:
-            return None
 
     def get_leader_data(self, idx):
-        return self.boarding_patrol["leaders"][idx]
-
-
+        leader_data = self.leaders[idx]
+        return leader_data
 
     def get_boarding_patrol(self):
         data = self.boarding_patrol
-        leaders = data["leaders"]
-        battle_line = data["battle_line"]
-        other = data["other"]
-        elite = data["elite"]
-        monster = data["monster"]
-
         formatted_data = f"""
         <html>
         <title> Test HTML </title>
@@ -113,7 +100,7 @@ class BoardingPatrolRoster:
         <h3> Leaders: </h3>
         <ul>
         """
-        for leader in leaders:
+        for leader in self.leaders:
             formatted_data += f"""
             <li> {leader['leader_name']} , enhancement: {leader['leader_enhancement']}, cost: {leader['leader_cost']} </li>
             """
@@ -126,7 +113,7 @@ class BoardingPatrolRoster:
         <h3> Battle Line: </h3>
         <ul>
         """
-        for b_unit in battle_line:
+        for b_unit in self.battle_line:
             formatted_data += f"""
             <li> {b_unit['unit_name']}, unit size: {b_unit['unit_size']}, cost: {b_unit['unit_cost']}</li>
             """
@@ -136,7 +123,7 @@ class BoardingPatrolRoster:
         <h3> Elite: </h3>
         <ul>
         """
-        for e_unit in elite:
+        for e_unit in self.elite:
             formatted_data += f"""
                     <li> {e_unit['unit_name']}, unit size: {e_unit['unit_size']}, cost: {e_unit['unit_cost']}</li>
             """
@@ -146,7 +133,7 @@ class BoardingPatrolRoster:
         <h3> Other: </h3>
         <ul>
         """
-        for o_unit in other:
+        for o_unit in self.other:
             formatted_data += f"""
             <li> {o_unit['unit_name']}, unit size: {o_unit['unit_size']}, cost: {o_unit['unit_cost']}</li>
             """
@@ -156,7 +143,7 @@ class BoardingPatrolRoster:
         <h3> Monster: </h3>
         <ul>
         """
-        for m_unit in monster:
+        for m_unit in self.monster:
             formatted_data += f"""
             <li> {m_unit['unit_name']}, unit size: {m_unit['unit_size']}, cost: {m_unit['unit_cost']}</li>
             """
@@ -169,9 +156,7 @@ class BoardingPatrolRoster:
         </body>
         </html>
         """
-
         return formatted_data
-
 
 
 factions = [ "Tau Empire", "Chaos Daemons"]
@@ -192,7 +177,7 @@ def get_core_enhancements(file):
         with open(file, 'r') as data_file:
             c_enhancements = json.load(data_file)
             data_file.close()
-    except IOError as e:
+    except IOError:
         raise RuntimeError(f'ERROR: Unable to open core enhancements data file: %s ', file)
     return c_enhancements
 
@@ -217,4 +202,3 @@ def get_detachment_names(faction_name):
     for detachment_name,data_file in detachments[faction_name].items():
         available_detachments.append(detachment_name)
     return available_detachments
-

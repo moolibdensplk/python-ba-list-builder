@@ -94,8 +94,6 @@
     </property>
     <addaction name="actionNew_menu"/>
     <addaction name="actionOpen_menu"/>
-    <addaction name="actionSave_menu"/>
-    <addaction name="actionSave_As_menu"/>
     <addaction name="actionExit_menu"/>
    </widget>
    <addaction name="menuFile"/>
